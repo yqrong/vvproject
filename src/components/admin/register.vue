@@ -22,7 +22,7 @@
           </el-form-item>
           <el-form-item prop="pwd" label="验证码：">
             <el-input type="text" v-model="account.pwd" auto-complete="off" placeholder="请输入正确图片内容"></el-input>
-			<span>图片</span>
+			<span>验证码图片</span>
           </el-form-item>
           <el-form-item style="width:100%;">
             <el-button type="primary" style="width:100%;" @click.native.prevent="handleRegister" :loading="loading">下一步</el-button>
