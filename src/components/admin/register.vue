@@ -5,13 +5,7 @@
       <span class="right-text">优化管理•智慧出行</span>
     </div>
     <el-row :gutter="10" class="register-body">
-      <el-col :xs="24" :sm="12" :md="12" :lg="12">
-        <div class="qr-codes">
-          <a class="mgr" href="javascript:;"><img src="../../assets/totalnumber.jpg"></a>
-          <a href="javascript:;"><img src="../../assets/downloadcode.png"></a>
-        </div>
-      </el-col>
-      <el-col :xs="24" :sm="12" :md="12" :lg="12">
+      <el-col :xs="24" :sm="12" :md="12" :lg="12" class="el-col-sm-push-12 el-col-md-push-12 el-col-lg-push-12">
         <el-form ref="AccountForm" :model="account" :rules="rules" label-position="top" label-width="80px"
                  class="demo-ruleForm register-container">
           <div class="top-content">
@@ -20,11 +14,12 @@
           <el-form-item prop="username" label="手机号：">
             <el-input type="text" v-model="account.username" auto-complete="off" placeholder="请输入注册手机号"></el-input>
           </el-form-item>
-          <el-form-item prop="pwd" label="验证码：">
-            <el-input type="text" v-model="account.pwd" auto-complete="off" placeholder="请输入正确图片内容"></el-input>
-			<span>验证码图片</span>
+          <el-form-item class="code-item" prop="pwd" label="验证码：">
+            <el-input class="code-input" type="text" v-model="account.pwd" auto-complete="off" placeholder="请输入验证码"></el-input>
+            <span>{{validCode}}</span>
+            <a href="javascript:void(0);" @click="getCode(4)" title="切换验证码">换一张</a>
           </el-form-item>
-          <el-form-item style="width:100%;">
+          <el-form-item style="margin-bottom:0; width:100%;">
             <el-button type="primary" style="width:100%;" @click.native.prevent="handleRegister" :loading="loading">下一步</el-button>
           </el-form-item>
           <el-form-item class="extra-text">
@@ -33,7 +28,12 @@
           </el-form-item>
         </el-form>
       </el-col>
-
+      <el-col :xs="24" :sm="12" :md="12" :lg="12" class="el-col-sm-pull-12 el-col-md-pull-12 el-col-lg-pull-12">
+        <div class="qr-codes">
+          <a class="mgr" href="javascript:;"><img src="../../assets/totalnumber.jpg"><p>扫码关注公众号</p></a>
+          <a href="javascript:;"><img src="../../assets/downloadcode.png"><p>扫码下载APP</p></a>
+        </div>
+      </el-col>
     </el-row>
     <div class="footer"><p class="footer-msg">©CopyRight 2016-2017 中仁车汇科技发展（深圳）有限公司 版权所有 <a href="http://www.miibeian.gov.cn" target="_blank">粤ICP备17004709号</a></p></div>
   </div>
@@ -53,6 +53,7 @@
       };
       return {
         loading: false,
+        validCode: '',
         account: {
           username: '',
           pwd: ''
@@ -71,6 +72,9 @@
         checked: true
       };
     },
+    created(){
+      this.getCode(4);
+    },
     methods: {
       handleRegister(){
         let that = this;
@@ -84,20 +88,29 @@
         console.log('login opt.');
         localStorage.setItem('access-user', JSON.stringify(result));
         that.$router.push({path: '/'});
+      },
+      getCode(n) {
+        var all = "AZXCVBNMSDFGHJKLQWERTYUIOPZXCVBNMASDFGHJKLQWERTYUIOP0123456789";
+        var b = "";
+        for (var i = 0; i < n; i++) {
+          var index = Math.floor(Math.random() * 62);
+          b += all.charAt(index);
+
+        }
+        this.validCode = b;
       }
     }
   }
 </script>
-<style scoped>
-  body {
-    background: #DFE9FB;
+<style>
+  #app {
+    margin-top: 0 !important;
   }
   .main {
     margin: 90px auto;
-    padding: 40px;
-    width: 70%;
-    max-width: 890px;
-    min-width: 420px;
+    padding: 18px;
+    max-width: 836px;
+    min-width: 280px;
     /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
    /* -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -113,23 +126,24 @@
     background: -webkit-linear-gradient(top, #ace, #00C1DE); /*Safari5.1 Chrome 10+*/
     background: -o-linear-gradient(top,#ace, #00C1DE); /*Opera 11.10+*/
   }
+
   .header-title {
     position: relative;
-    margin-bottom: 15px;
+    padding: 15px 10px 15px;
+    border-bottom: 5px solid #ccc;
   }
   .header-title .left-text {
-    font-size: 24px;
+    font-size: 1.7rem;
     color: #444;
   }
   .header-title .right-text {
     position: absolute;
-    top: 4px;
-    right: 0;
-    font-size: 18px;
+    top: 18px;
+    right: 10px;
+    font-size: 1.28rem;
   }
   .register-body {
-    padding: 40px 10px;
-    border-top: 5px solid #ccc;
+    padding: 40px 3%;
   }
   .qr-codes {
     margin-top: 100px;
@@ -139,6 +153,8 @@
   .qr-codes a {
     display: inline-block;
     width: 40%;
+    font-size: 1rem;
+    color: #333;
   }
   .qr-codes img {
     max-width: 100%;
@@ -162,7 +178,7 @@
   .register-container .title {
     display: inline-block;
     width: 50%;
-    line-height: 36px;
+    line-height: 44px;
     font-size: 22px;
     text-align: center;
     color: #505458;
@@ -172,6 +188,30 @@
   }
   .register-container .remember {
     margin: 0px 0px 35px 0px;
+  }
+  .register-container .code-item {
+    font-size: 0;
+  }
+  .register-container .code-item .code-input {
+    display: inline-block;
+    width: 57%;
+    font-size: 14px;
+  }
+  .register-container .code-item span {
+    display: inline-block;
+    width: 20%;
+    font-size: 14px;
+    text-align: center;
+    color: #2522d6;
+    font-weight: bold;
+    background-color: #fddd65;
+  }
+  .register-container .code-item a {
+    display: inline-block;
+    width: 20%;
+    font-size: 14px;
+    color: #4e69f4;
+    text-align: center;
   }
   .extra-text {
     position: relative;
@@ -202,7 +242,7 @@
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
-    font-size: 15px;
+    font-size: 1.08rem;
     color: #666;
   }
   .footer .footer-msg a {
@@ -215,5 +255,13 @@
     color: #2a6496;
     text-decoration: underline;
     outline: 0;
+  }
+  @media all and (max-width: 768px) {
+    .main {
+      margin: 0 auto 24px;
+    }
+    .qr-codes {
+      margin-top: 10px;
+    }
   }
 </style>
