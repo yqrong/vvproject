@@ -12,7 +12,7 @@
             <a :class="enterpriseReg?'title active': 'title'" href="javascript:;" @click="handleEnterprise">企业注册</a><a :class="personReg?'title active': 'title'" href="javascript:;" @click="handlePerson">个人注册</a>
           </div>
           <el-form-item prop="username" label="手机号：">
-            <el-input ref="input" type="text" v-model="account.username" auto-complete="off" placeholder="请输入注册手机号"></el-input>
+            <el-input type="text" v-model="account.username" auto-complete="off" autofocus="true" placeholder="请输入注册手机号"></el-input>
           </el-form-item>
           <el-form-item class="code-item" prop="code" label="验证码：">
             <el-input class="code-input" type="text" v-model="account.code" auto-complete="off" placeholder="请输入验证码"></el-input>
@@ -97,7 +97,6 @@
     },
     created(){
       this.getCode(4);
-      this.$refs['input'].focus();
     },
     methods: {
       handleRegister(){
@@ -236,10 +235,11 @@
   .register-container .code-item span {
     display: inline-block;
     width: 20%;
-    font-size: 15px;
+    font-size: 16px;
     text-align: center;
     color: #2522d6;
     font-weight: bold;
+    font-style: italic;
     background-color: #fddd65;
   }
   .register-container .code-item a {
