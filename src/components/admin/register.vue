@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="register-main">
     <div class="header-title">
       <span class="left-text">注册VV账号</span>
       <span class="right-text">优化管理•智慧出行</span>
@@ -9,13 +9,13 @@
         <el-form ref="AccountForm" :model="account" :rules="rules" label-position="top" label-width="80px"
                  class="demo-ruleForm register-container">
           <div class="top-content">
-            <a class="title active" href="javascript:;">企业注册</a><a class="title" href="javascript:;">个人注册</a>
+            <a :class="enterpriseReg?'title active': 'title'" href="javascript:;" @click="handleEnterprise">企业注册</a><a :class="personReg?'title active': 'title'" href="javascript:;" @click="handlePerson">个人注册</a>
           </div>
           <el-form-item prop="username" label="手机号：">
-            <el-input type="text" v-model="account.username" auto-complete="off" placeholder="请输入注册手机号"></el-input>
+            <el-input ref="input" type="text" v-model="account.username" auto-complete="off" placeholder="请输入注册手机号"></el-input>
           </el-form-item>
-          <el-form-item class="code-item" prop="pwd" label="验证码：">
-            <el-input class="code-input" type="text" v-model="account.pwd" auto-complete="off" placeholder="请输入验证码"></el-input>
+          <el-form-item class="code-item" prop="code" label="验证码：">
+            <el-input class="code-input" type="text" v-model="account.code" auto-complete="off" placeholder="请输入验证码"></el-input>
             <span>{{validCode}}</span>
             <a href="javascript:void(0);" @click="getCode(4)" title="切换验证码">换一张</a>
           </el-form-item>
@@ -39,6 +39,7 @@
   </div>
 </template>
 <script>
+  import util from '../../common/util'
   export default {
     data() {
       var validateAccount = (rules, value, callback) => {
@@ -48,32 +49,55 @@
           if (this.account.username !== '') {
             this.account.username = value;
           }
+          if(!util.checkTel.validateTel(this.account.username)) {
+            callback(new Error('手机号格式不正确'));
+          } else {
+            this.telCorrect = true;
+          }
+          callback();
+        }
+      };
+      var validateCode = (rules, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入验证码'));
+        } else {
+          if (this.account.code !== '') {
+            this.account.code = value;
+          }
+          if(this.account.code.toUpperCase() !== this.validCode) {
+            callback(new Error('验证码不正确'));
+          } else {
+            this.codeCorrect = true;
+          }
           callback();
         }
       };
       return {
+        enterpriseReg: true,
+        personReg: false,
         loading: false,
+        telCorrect: false,
+        codeCorrect: false,
         validCode: '',
         account: {
           username: '',
-          pwd: ''
+          code: ''
         },
         rules: {
           username: [
-            //{required: true, message: '请输入账号', trigger: 'blur'},
+            //{required: true, message: '请输入手机号', trigger: 'blur'},
             { required: true, validator: validateAccount, trigger: 'blur' }
-
           ],
-          pwd: [
-            {required: true, message: '请输入密码', trigger: 'blur'},
-            //{ validator: validaePass2 }
+          code: [
+            //{required: true, message: '请输入验证码', trigger: 'blur'},
+            { required: true, validator: validateCode, trigger: 'blur' }
           ]
-        },
-        checked: true
+        }
       };
     },
     created(){
       this.getCode(4);
+      this.$refs['input'].focus();
     },
     methods: {
       handleRegister(){
@@ -81,23 +105,35 @@
         let result = {
           id: '1',
           username: 'admin',
-          nickname: this.account.username,
+          nickname: that.account.username,
           name: 'administrator',
           email: '888888@163.com'
         };
-        console.log('login opt.');
-        localStorage.setItem('access-user', JSON.stringify(result));
-        that.$router.push({path: '/'});
+        if(that.telCorrect && that.codeCorrect){
+          that.loading = true;
+          //localStorage.setItem('access-user', JSON.stringify(result));
+          that.$router.push({path: '/registerNext'});
+        } else {
+          that.loading = false;
+        }
       },
       getCode(n) {
-        var all = "AZXCVBNMSDFGHJKLQWERTYUIOPZXCVBNMASDFGHJKLQWERTYUIOP0123456789";
-        var b = "";
+        let all = "AZXCVBNMSDFGHJKLQWERTYUIOPZXCVBNMASDFGHJKLQWERTYUIOP0123456789";
+        let b = "";
         for (var i = 0; i < n; i++) {
-          var index = Math.floor(Math.random() * 62);
+          let index = Math.floor(Math.random() * 62);
           b += all.charAt(index);
 
         }
         this.validCode = b;
+      },
+      handleEnterprise() {
+        this.enterpriseReg = true;
+        this.personReg = false;
+      },
+      handlePerson() {
+        this.enterpriseReg = false;
+        this.personReg = true;
       }
     }
   }
@@ -106,7 +142,7 @@
   #app {
     margin-top: 0 !important;
   }
-  .main {
+  .register-main {
     margin: 90px auto;
     padding: 18px;
     max-width: 836px;
@@ -200,7 +236,7 @@
   .register-container .code-item span {
     display: inline-block;
     width: 20%;
-    font-size: 14px;
+    font-size: 15px;
     text-align: center;
     color: #2522d6;
     font-weight: bold;
@@ -257,7 +293,7 @@
     outline: 0;
   }
   @media all and (max-width: 768px) {
-    .main {
+    .register-main {
       margin: 0 auto 24px;
     }
     .qr-codes {

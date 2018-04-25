@@ -20,6 +20,7 @@ import CustomerManager from '@/components/customer/index.vue'
 import PartnerManager from '@/components/partner/index.vue'
 import NotFound from '@/components/404.vue'
 import Register from '@/components/admin/register.vue'
+import RegisterNext from '@/components/admin/registerNext.vue'
 
 // 懒加载方式，当路由被访问的时候才加载对应组件
 const Login = resolve => require(['@/components/login'], resolve)
@@ -37,6 +38,11 @@ let router = new Router({
       path: '/register',
       type: 'register',
       component: Register
+    },
+    {
+      path: '/registerNext',
+      type: 'register',
+      component: RegisterNext
     },
     {
       path: '*',
