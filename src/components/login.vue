@@ -13,7 +13,7 @@
         <el-input type="text" v-model="account.username" auto-complete="off" placeholder="手机号或公司企业码"></el-input>
       </el-form-item>
       <el-form-item prop="pwd">
-        <el-input type="password" v-model="account.pwd" auto-complete="off" placeholder="请输入登录密码"></el-input>
+        <el-input type="password" v-model="account.pwd" :autofocus="pwdFocus" auto-complete="off" placeholder="请输入登录密码"></el-input>
       </el-form-item>
       <!--<el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>-->
       <el-form-item class="extra-text">
@@ -56,8 +56,17 @@
             //{ validator: validaePass2 }
           ]
         },
+        pwdFocus: false,
         checked: true
       };
+    },
+    created() {
+      let reg_user = JSON.parse(window.localStorage.getItem('register-user'));
+      if (reg_user) {
+        this.account.username = reg_user.username;
+        this.account.pwd = '';
+        this.pwdFocus = true;
+      }
     },
     methods: {
       handleLogin(){
@@ -71,6 +80,7 @@
         };
         console.log('login opt.');
         localStorage.setItem('access-user', JSON.stringify(result));
+        window.localStorage.removeItem('register-user');
         that.$router.push({path: '/'});
       }
     }

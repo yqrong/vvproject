@@ -12,7 +12,7 @@
             <a :class="enterpriseReg?'title active': 'title'" href="javascript:;" @click="handleEnterprise">企业注册</a><a :class="personReg?'title active': 'title'" href="javascript:;" @click="handlePerson">个人注册</a>
           </div>
           <el-form-item prop="username" label="手机号：">
-            <el-input type="text" v-model="account.username" auto-complete="off" autofocus="true" placeholder="请输入注册手机号"></el-input>
+            <el-input type="text" v-model="account.username" auto-complete="off" :autofocus="true" placeholder="请输入注册手机号"></el-input>
           </el-form-item>
           <el-form-item class="code-item" prop="code" label="验证码：">
             <el-input class="code-input" type="text" v-model="account.code" auto-complete="off" placeholder="请输入验证码"></el-input>
@@ -23,8 +23,8 @@
             <el-button type="primary" style="width:100%;" @click.native.prevent="handleRegister" :loading="loading">下一步</el-button>
           </el-form-item>
           <el-form-item class="extra-text">
-            <a href="#" class="know-more" title="了解VV租行">了解VV租行管理</a>
-            <a href="#" class="login-text" title="立即登录">已经拥有账户？登录</a>
+            <a href="javascript:;" class="know-more" title="了解VV租行">了解VV租行管理</a>
+            <a href="/login" class="login-text" title="立即登录">已经拥有账户？登录</a>
           </el-form-item>
         </el-form>
       </el-col>
@@ -199,14 +199,6 @@
   .qr-codes .mgr {
     margin-right: 10%;
   }
-    /*.main-right {
-      float: right;
-      width: 420px;
-    }
-    .main-left {
-      float: left;
-      width: 320px;
-    }*/
   .register-container .top-content {
     font-size: 0;
   }
