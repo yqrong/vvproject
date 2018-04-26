@@ -88,7 +88,7 @@
         getCode: '获取验证码',
         getCodeDisabled: false,
         account: {
-          telephone: '15812358883',
+          telephone: '15812358888',
           enterpriseCode: '',
           enterpriseName: '',
           workName: '',
