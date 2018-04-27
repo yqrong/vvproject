@@ -24,7 +24,7 @@
           </el-form-item>
           <el-form-item class="extra-text">
             <a href="javascript:;" class="know-more" title="了解VV租行">了解VV租行管理</a>
-            <a href="/login" class="login-text" title="立即登录">已经拥有账户？登录</a>
+            <router-link :to="{path: 'login'}" class="login-text" title="立即登录">已经拥有账户？登录</router-link>
           </el-form-item>
         </el-form>
       </el-col>
