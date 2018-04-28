@@ -30,8 +30,8 @@
       </el-col>
       <el-col :xs="24" :sm="12" :md="12" :lg="12" class="el-col-sm-pull-12 el-col-md-pull-12 el-col-lg-pull-12">
         <div class="qr-codes">
-          <a class="mgr" href="javascript:;"><img src="../../assets/totalnumber.jpg"><p>扫码关注公众号</p></a>
-          <a href="javascript:;"><img src="../../assets/downloadcode.png"><p>扫码下载APP</p></a>
+          <a class="mgr" href="javascript:;"><img src="../../assets/images/totalnumber.jpg"><p>扫码关注公众号</p></a>
+          <a href="javascript:;"><img src="../../assets/images/downloadcode.png"><p>扫码下载APP</p></a>
         </div>
       </el-col>
     </el-row>
@@ -137,7 +137,7 @@
     }
   }
 </script>
-<style>
+<style lang="scss" scoped>
   #app {
     margin-top: 0 !important;
   }
@@ -147,9 +147,9 @@
     max-width: 836px;
     min-width: 280px;
     /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
-   /* -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -moz-border-radius: 5px;*/
+    /* -webkit-border-radius: 5px;
+     border-radius: 5px;
+     -moz-border-radius: 5px;*/
     background-clip: padding-box;
     background: #fff;
     border: 1px solid #eaeaea;
@@ -166,98 +166,119 @@
     position: relative;
     padding: 15px 10px 15px;
     border-bottom: 5px solid #ccc;
+
+    .left-text {
+      font-size: 1.7rem;
+      color: #444;
+    }
+
+    .right-text {
+      position: absolute;
+      top: 18px;
+      right: 10px;
+      font-size: 1.28rem;
+    }
   }
-  .header-title .left-text {
-    font-size: 1.7rem;
-    color: #444;
-  }
-  .header-title .right-text {
-    position: absolute;
-    top: 18px;
-    right: 10px;
-    font-size: 1.28rem;
-  }
+
   .register-body {
     padding: 40px 3%;
+
+    .qr-codes {
+      margin-top: 100px;
+      text-align: center;
+      font-size: 0;
+
+      a {
+        display: inline-block;
+        width: 40%;
+        font-size: 1rem;
+        color: #333;
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        border: 0;
+      }
+
+      .mgr {
+        margin-right: 10%;
+      }
+
+    }
   }
-  .qr-codes {
-    margin-top: 100px;
-    text-align: center;
-    font-size: 0;
+
+  .register-container {
+    .top-content {
+      font-size: 0;
+    }
+    .title {
+       display: inline-block;
+       width: 50%;
+       line-height: 44px;
+       font-size: 22px;
+       text-align: center;
+       color: #505458;
+
+        &.active {
+          color: #4e69f4;
+        }
+    }
+
+    .remember {
+      margin: 0px 0px 35px 0px;
+    }
+
+    .code-item {
+      font-size: 0;
+
+      .code-input {
+        display: inline-block;
+        width: 57%;
+        font-size: 14px;
+      }
+      span {
+        display: inline-block;
+        width: 20%;
+        font-size: 16px;
+        text-align: center;
+        color: #2522d6;
+        font-weight: bold;
+        font-style: italic;
+        background-color: #fddd65;
+      }
+
+      a {
+        display: inline-block;
+        width: 20%;
+        font-size: 14px;
+        color: #4e69f4;
+        text-align: center;
+      }
+
+      }
+      .extra-text {
+        position: relative;
+        margin-bottom: 0;
+        padding-left: 2px;
+
+      a {
+        font-size: 12px;
+        color: #aaa;
+
+      &:hover {
+         color: #29e;
+       }
+      }
+
+      .login-text {
+        position: absolute;
+        top: 4px;
+        right: 2px;
+      }
+    }
   }
-  .qr-codes a {
-    display: inline-block;
-    width: 40%;
-    font-size: 1rem;
-    color: #333;
-  }
-  .qr-codes img {
-    max-width: 100%;
-    max-height: 100%;
-    border: 0;
-  }
-  .qr-codes .mgr {
-    margin-right: 10%;
-  }
-  .register-container .top-content {
-    font-size: 0;
-  }
-  .register-container .title {
-    display: inline-block;
-    width: 50%;
-    line-height: 44px;
-    font-size: 22px;
-    text-align: center;
-    color: #505458;
-  }
-  .register-container .title.active {
-    color: #4E69F4;
-  }
-  .register-container .remember {
-    margin: 0px 0px 35px 0px;
-  }
-  .register-container .code-item {
-    font-size: 0;
-  }
-  .register-container .code-item .code-input {
-    display: inline-block;
-    width: 57%;
-    font-size: 14px;
-  }
-  .register-container .code-item span {
-    display: inline-block;
-    width: 20%;
-    font-size: 16px;
-    text-align: center;
-    color: #2522d6;
-    font-weight: bold;
-    font-style: italic;
-    background-color: #fddd65;
-  }
-  .register-container .code-item a {
-    display: inline-block;
-    width: 20%;
-    font-size: 14px;
-    color: #4e69f4;
-    text-align: center;
-  }
-  .extra-text {
-    position: relative;
-    margin-bottom: 0;
-    padding-left: 2px;
-  }
-  .extra-text a {
-    font-size: 12px;
-    color: #aaa;
-  }
-  .extra-text a:hover {
-    color: #29e;
-  }
-  .extra-text .login-text {
-    position: absolute;
-    top: 4px;
-    right: 2px;
-  }
+
   .footer {
     position: fixed;
     bottom: 0;
@@ -265,25 +286,27 @@
     padding: 20px 0;
     width: 100%;
     background-color: #2d2e2e;
+
+    .footer-msg {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1.08rem;
+      color: #666;
+
+      a {
+        color: #428bca;
+        text-decoration: none;
+
+        &:hover,&:focus,&:active {
+         color: #2a6496;
+         text-decoration: underline;
+         outline: 0;
+       }
+      }
+    }
   }
-  .footer .footer-msg {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 1.08rem;
-    color: #666;
-  }
-  .footer .footer-msg a {
-    color: #428bca;
-    text-decoration: none;
-  }
-  .footer .footer-msg a:hover,
-  .footer .footer-msg a:focus,
-  .footer .footer-msg a:active {
-    color: #2a6496;
-    text-decoration: underline;
-    outline: 0;
-  }
+
   @media all and (max-width: 768px) {
     .register-main {
       margin: 0 auto 24px;

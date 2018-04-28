@@ -18,7 +18,7 @@
       <!--<el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>-->
       <el-form-item class="extra-text">
         <a href="javascript:;" class="forget-pwd" title="找回密码">忘记密码?</a>
-        <router-link :to="{path: 'register'}" class="reg-text" title="立即注册">立即注册</router-link>
+        <router-link :to="{path: '/register'}" class="reg-text" title="立即注册">立即注册</router-link>
       </el-form-item>
       <el-form-item style="width:100%;">
         <el-button type="primary" style="width:100%;" @click.native.prevent="handleLogin" :loading="loading">登录</el-button>

@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   font-size: 14px;
 }
@@ -15,6 +20,11 @@ body {
 
 a {
   text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin-bottom: 0;
 }
 
 #app {
@@ -45,20 +55,20 @@ a {
 
 .container .topbar-wrap .topbar-logo {
   float: left;
-  width: 59px;
+  width: 48px;
   line-height: 26px;
 }
 
 .container .topbar-wrap .topbar-logos {
   float: left;
-  width: 120px;
+  width: 140px;
   line-height: 48px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .container .topbar-wrap .topbar-logo img, .container .topbar-wrap .topbar-logos img {
-  height: 40px;
-  margin-top: 5px;
+  height: 30px;
+  margin-top: 12px;
   margin-left: 2px;
 }
 
@@ -85,8 +95,9 @@ a {
   color: #fff;
 }
 
-.el-menu-item .fa {
+.el-menu-item .iconfont {
   margin-right: 5px;
+  display: inline-block;
   width: 24px;
   text-align: center;
   font-size: 18px;
@@ -98,10 +109,35 @@ a {
   padding-right: 12px;
 }
 
+.container .topbar-wrap .topbar-timer {
+  display: inline-block;
+}
+
+.container .topbar-wrap .topbar-timer span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.container .topbar-wrap .topbar-timer .login-name {
+  margin: 0 6px;
+  font-style: normal;
+}
+
 .container .topbar-wrap .userinfo-inner {
   cursor: pointer;
   color: #fff;
   padding-left: 10px;
+}
+
+.container .topbar-wrap .userinfo-inner img {
+  margin-left: 6px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #504d4d;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  vertical-align: middle;
 }
 
 .container .menu-toggle {
@@ -112,7 +148,7 @@ a {
   line-height: 30px;
 }
 
-.container .menu-toggle .fa:hover {
+.container .menu-toggle .iconfont:hover {
   cursor: pointer;
 }
 
@@ -170,7 +206,7 @@ aside .warp-breadcrum {
 }
 
 .container aside .el-menu {
-  width: 180px;
+  width: 189px;
 }
 
 .container aside .el-menu--collapse {

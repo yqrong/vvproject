@@ -4,8 +4,8 @@
     <aside :class="{showSidebar:!collapsed}">
       <!--展开折叠开关-->
       <div class="menu-toggle" @click.prevent="collapse">
-        <i class="fa fa-outdent" v-show="!collapsed" title="收起"></i>
-        <i class="fa fa-indent" v-show="collapsed" title="展开"></i>
+        <i class="iconfont icon-outdent" v-show="!collapsed" title="收起"></i>
+        <i class="iconfont icon-indent" v-show="collapsed" title="展开"></i>
       </div>
       <!--导航菜单-->
       <el-menu :default-active="defaultActiveIndex" router :collapse="collapsed" @select="handleSelect">
@@ -64,7 +64,7 @@
     },
     watch: {
       '$route': function(to, from){ // 路由改变时执行
-        console.info("enterpriseNav to.path:" + to.path);
+        //console.info("enterpriseNav to.path:" + to.path);
       }
     }
   }

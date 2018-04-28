@@ -34,7 +34,7 @@
       <div class="topbar-account topbar-btn">
         <el-dropdown trigger="click">
           <span class="el-dropdown-link userinfo-inner">
-            <i class="fa fa-user"></i> {{nickname}}   <i class="fa fa-caret-down"></i></span>
+            <i class="iconfont icon-user"></i> {{nickname}}   <i class="el-icon-caret-bottom"></i></span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
               <div @click="jumpTo('/user/profile')"><span style="color: #555;font-size: 14px;">个人信息</span></div>

@@ -61,7 +61,7 @@ let router = new Router({
           component: HomeNav,
           name: 'dashboard',
           leaf: true, // 只有一个节点
-          iconCls: 'fa fa-home', // 图标样式class
+          iconCls: 'iconfont icon-home', // 图标样式class
           menuShow: true,
           children: [
             { path: '/dashboard', component: Dashboard, name: '首页', menuShow: true }
@@ -94,7 +94,7 @@ let router = new Router({
           component: EnterpriseNav,
           name: 'enterpriseList',
           leaf: true, // 只有一个节点
-          iconCls: 'fa fa-home', // 图标样式class
+          iconCls: 'iconfont icon-home', // 图标样式class
           menuShow: true,
           children: [
             { path: '/enterprise/list', component: EnterpriseList, name: '企业列表', menuShow: true },
