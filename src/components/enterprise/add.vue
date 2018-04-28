@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p style="margin-bottom: 20px; font-weight: 500;">添加企业</p>
     <el-form ref="form" :model="form" label-width="110px">
       <el-col :span="12">
         <el-form-item label="企业编号：">
@@ -52,8 +53,8 @@
           number: '',
           name: '',
           industry: '',
-          model: '',
-          range: '',
+          model: '国有企业',
+          range: [],
           regDate: ''
         }
       };
