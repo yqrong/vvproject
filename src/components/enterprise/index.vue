@@ -6,7 +6,10 @@
           <el-form-item>
             <el-input v-model="filters.name" placeholder="请输入企业名称" auto-complete="off" @keyup.enter.native="fetchData"></el-input>
           </el-form-item>
-          <el-form-item type="primary" v-on:click="fetchData"></el-form-item>
+          <el-form-item>
+            <el-button type="primary" size="medium" v-on:click="fetchData">查询</el-button>
+          </el-form-item>
+        </el-form>
         </el-form>
       </el-col>
       <el-table ref="multipleTable" :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
@@ -67,7 +70,7 @@
     created: function(){
       // 组件创建完后获取数据，
       // 此时 data 已经被 observed 了
-      this.fetchData();
+      //this.fetchData();  //调用接口获取动态数据
 
     },
     methods: {

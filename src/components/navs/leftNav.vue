@@ -5,12 +5,12 @@
       <!--展开折叠开关-->
       <div class="menu-toggle" @click.prevent="collapse">
         <i class="iconfont icon-outdent" v-show="!collapsed" title="收起"></i>
-        <i class="iconfont icon-outdent" v-show="collapsed" title="展开"></i>
+        <i class="iconfont icon-indent" v-show="collapsed" title="展开"></i>
       </div>
       <!--导航菜单-->
-      <el-menu :default-active="defaultActiveIndex" router :collapse="collapsed" @select="handleSelect">
+      <el-menu router :collapse="collapsed">
         <template v-for="(issue,index) in $router.options.routes">
-          <template v-if="issue.type === 'home'">
+          <template v-if="issue.name === $store.state.leftNavState">
             <template v-for="(item,index) in issue.children">
               <el-submenu v-if="!item.leaf" :index="index+''" v-show="item.menuShow">
                 <template slot="title"><i :class="item.iconCls"></i><span slot="title">{{item.name}}</span></template>
@@ -42,29 +42,24 @@
 </template>
 <script>
   export default {
-    name: 'homeNav',
+    name: 'leftNav',
     data () {
       return {
-        defaultActiveIndex: "0",
         collapsed: false
       }
     },
     methods: {
-      handleSelect(index){
-        this.defaultActiveIndex = index;
-      },
       //折叠导航栏
       collapse: function () {
         this.collapsed = !this.collapsed;
       },
       jumpTo(url){
-        this.defaultActiveIndex = url;
         this.$router.push(url); //用go刷新
       }
     },
     watch: {
       '$route': function(to, from){ // 路由改变时执行
-        //console.info("homeNav to.path:" + to.path);
+        //console.info("enterpriseNav to.path:" + to.path);
       }
     }
   }

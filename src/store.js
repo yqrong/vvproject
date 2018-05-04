@@ -23,7 +23,8 @@ const data = [
 ]
 
 const state = {
-  activeList: data
+  topNavState: 'home',
+  leftNavState: 'home'
 }
 
 /*从本地存储读取数据*/

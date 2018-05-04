@@ -6,10 +6,10 @@
         <a href="/"><img src="../assets/logo.png" style="padding-left:8px;"></a>
       </div>
       <div class="topbar-logos" v-show="!collapsed">
-        <a href="/" style="color: #fff;">VV租行</a>
+        <a href="/" style="color: #fff;">车车综合管理</a>
       </div>
       <div class="topbar-title">
-        <el-row v-show="homeShow">
+        <el-row v-show="$store.state.topNavState==='home'">
           <el-col :span="24">
             <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
               <el-menu-item index="/">工作台</el-menu-item>
@@ -19,14 +19,12 @@
             </el-menu>
           </el-col>
         </el-row>
-        <el-row v-show="enterpriseShow">
+        <el-row v-show="$store.state.topNavState==='enterprise'">
           <el-col :span="24">
             <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
               <el-menu-item index="/enterpriseManager">企业信息</el-menu-item>
               <el-menu-item index="/vehicleManager">车辆信息</el-menu-item>
               <el-menu-item index="/deptManager">组织架构</el-menu-item>
-              <el-menu-item index="/customerManager">客户管理</el-menu-item>
-              <el-menu-item index="/partnerManager">伙伴管理</el-menu-item>
             </el-menu>
           </el-col>
         </el-row>
@@ -65,71 +63,63 @@
       return {
         defaultActiveIndex: "/",
         loading: false,
+        today: '',
         nickname: '',
         collapsed: false,
-        homeShow: true,
-        enterpriseShow: false
+        homeMenu: false,
+        enterpriseMenu: false
       }
     },
     created() {
       road.$on('setNickName', (text) => {
-          this.nickname = text;
-      });
+        this.nickname = text;
+    });
 
       road.$on('goto', (url) => {
         if(url === "/login") {
-          localStorage.removeItem('access-user');
-          this.$router.push(url);
-        }
-      });
+        localStorage.removeItem('access-user');
+        this.$router.push(url);
+      }
+    });
       // 组件创建完后获取数据，
       // 此时 data 已经被 observed 了
-      this.fetchNavData()
+      this.fetchNavData();
     },
     methods: {
       handleSelect(index){
         this.defaultActiveIndex = index;
-        if (index == "/") {
-          this.homeShow = true;
-          this.enterpriseShow = false;
-        } else if (index == "/enterpriseManager") {
-          this.homeShow = false;
-          this.enterpriseShow = true;
-        } else {
-          this.homeShow = true;
-          this.enterpriseShow = false;
-        }
       },
       //折叠导航栏
       collapse () {
         this.collapsed = !this.collapsed;
       },
-      fetchNavData () {
+      fetchNavData () { // 初始化菜单激活项
         var cur_path = this.$route.path; //获取当前路由
         var routers = this.$router.options.routes; // 获取路由对象
-        var nav_type = "";
+        var nav_type = "home", nav_name = "home";
         for (var i = 0; i < routers.length; i++) {
           var children = routers[i].children;
-          if(routers[i].children){
+          if(children){
             for (var j = 0; j < children.length; j++) {
               var grand_children = children[j].children;
-              for (var k = 0; k < grand_children.length; k++) {
-                if (grand_children[k].path === cur_path) {
-                  nav_type = routers[i].type;
-                  break;
+              if(grand_children){
+                for (var k = 0; k < grand_children.length; k++) {
+                  if (grand_children[k].path === cur_path) {
+                    nav_type = routers[i].type;
+                    nav_name = routers[i].name;
+                    break;
+                  }
                 }
               }
             }
           }
         }
-        if (nav_type == "home") {
+        this.$store.state.topNavState = nav_type;
+        this.$store.state.leftNavState = nav_name;
+        if(nav_type == "home"){
           this.defaultActiveIndex = "/";
-          this.homeShow = true;
-          this.enterpriseShow = false;
-        } else if (nav_type == "enterprise") {
-          this.defaultActiveIndex = "/enterpriseManager";
-          this.homeShow = false;
-          this.enterpriseShow = true;
+        } else {
+          this.defaultActiveIndex = "/" + nav_name + "Manager";
         }
       },
       jumpTo(url){
@@ -144,7 +134,7 @@
         }).then(() => {
           //确认
           localStorage.removeItem('access-user');
-          that.$router.go('/login'); //用go刷新
+        that.$router.go('/login'); //用go刷新
 //          API.logout().then(function (result) {
 //            console.info(result);
 //            localStorage.removeItem('access-user');
@@ -156,7 +146,7 @@
 //            console.log(error);
 //            that.$message.error({showClose: true, message: '请求出现异常', duration: 2000});
 //          });
-        }).catch(() => {});
+      }).catch(() => {});
       }
     },
     mounted() {

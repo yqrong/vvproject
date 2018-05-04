@@ -3,21 +3,18 @@
  */
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomeNav from '@/components/navs/homeNav.vue'
+import LeftNav from '@/components/navs/leftNav.vue'
 import Home from '@/components/home.vue'
 import Dashboard from '@/components/workbench/dashboard.vue'
 import Mission from '@/components/workbench/mission.vue'
 import Plan from '@/components/workbench/plan.vue'
 import Maillist from '@/components/workbench/maillist.vue'
-import EnterpriseNav from '@/components/navs/enterpriseNav.vue'
 import EnterpriseList from '@/components/enterprise/index.vue'
 import EnterpriseAdd from '@/components/enterprise/add.vue'
 import EnterpriseDetail from '@/components/enterprise/detail.vue'
 import EnterpriseValidate from '@/components/enterprise/validate.vue'
 import VehicleManage from '@/components/vehicle/index.vue'
 import DeptManager from '@/components/dept/index.vue'
-import CustomerManager from '@/components/customer/index.vue'
-import PartnerManager from '@/components/partner/index.vue'
 import NotFound from '@/components/404.vue'
 import Register from '@/components/admin/register.vue'
 import RegisterNext from '@/components/admin/registerNext.vue'
@@ -58,7 +55,7 @@ let router = new Router({
       children: [
         {
           path: '/dashboard',
-          component: HomeNav,
+          component: LeftNav,
           name: 'dashboard',
           leaf: true, // 只有一个节点
           iconCls: 'iconfont icon-home', // 图标样式class
@@ -69,7 +66,7 @@ let router = new Router({
         },
         {
           path: '/mySet',
-          component: HomeNav,
+          component: LeftNav,
           name: '我的设置',
           iconCls: 'el-icon-menu',
           menuShow: true,
@@ -91,7 +88,7 @@ let router = new Router({
       children: [
         {
           path: '/enterpriseList',
-          component: EnterpriseNav,
+          component: LeftNav,
           name: 'enterpriseList',
           leaf: true, // 只有一个节点
           iconCls: 'iconfont icon-home', // 图标样式class
@@ -103,7 +100,7 @@ let router = new Router({
         },
         {
           path: '/enterpriseAdd',
-          component: EnterpriseNav,
+          component: LeftNav,
           name: 'enterpriseAdd',
           leaf: true, // 只有一个节点
           iconCls: 'el-icon-menu',
@@ -114,13 +111,55 @@ let router = new Router({
         },
         {
           path: '/enterpriseValidate',
-          component: EnterpriseNav,
+          component: LeftNav,
           name: 'enterpriseValidate',
           leaf: true, // 只有一个节点
           iconCls: 'el-icon-menu',
           menuShow: true,
           children: [
             { path: '/enterprise/validate', component: EnterpriseValidate, name: '企业认证', menuShow: true }
+          ]
+        }
+      ]
+    },
+    {
+      path: '/vehicleManager',
+      type: 'enterprise',
+      name: 'vehicle',
+      component: Home,
+      redirect: '/vehicle/list',
+      menuShow: true,
+      children: [
+        {
+          path: '/vehicleList',
+          component: LeftNav,
+          name: 'vehicleList',
+          leaf: true, // 只有一个节点
+          iconCls: 'iconfont icon-home', // 图标样式class
+          menuShow: true,
+          children: [
+            { path: '/vehicle/list', component: VehicleManage, name: '车辆信息', menuShow: true }
+          ]
+        }
+      ]
+    },
+    {
+      path: '/deptManager',
+      type: 'enterprise',
+      name: 'dept',
+      component: Home,
+      redirect: '/dept/list',
+      menuShow: true,
+      children: [
+        {
+          path: '/deptList',
+          component: LeftNav,
+          name: 'deptList',
+          leaf: true, // 只有一个节点
+          iconCls: 'iconfont icon-home', // 图标样式class
+          menuShow: true,
+          children: [
+            { path: '/dept/list', component: DeptManager, name: '部门信息', menuShow: true }
           ]
         }
       ]
