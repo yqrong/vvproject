@@ -63,11 +63,8 @@
       return {
         defaultActiveIndex: "/",
         loading: false,
-        today: '',
         nickname: '',
-        collapsed: false,
-        homeMenu: false,
-        enterpriseMenu: false
+        collapsed: false
       }
     },
     created() {
