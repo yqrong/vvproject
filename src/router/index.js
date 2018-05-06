@@ -3,24 +3,24 @@
  */
 import Vue from 'vue'
 import Router from 'vue-router'
-import LeftNav from '@/components/navs/leftNav.vue'
-import Home from '@/components/home.vue'
-import Dashboard from '@/components/workbench/dashboard.vue'
-import Mission from '@/components/workbench/mission.vue'
-import Plan from '@/components/workbench/plan.vue'
-import Maillist from '@/components/workbench/maillist.vue'
-import EnterpriseList from '@/components/enterprise/index.vue'
-import EnterpriseAdd from '@/components/enterprise/add.vue'
-import EnterpriseDetail from '@/components/enterprise/detail.vue'
-import EnterpriseValidate from '@/components/enterprise/validate.vue'
-import VehicleManage from '@/components/vehicle/index.vue'
-import DeptManager from '@/components/dept/index.vue'
+import LeftNav from '@/components/nav/leftNav.vue'
+import Home from '@/views/home.vue'
+import Dashboard from '@/views/workbench/dashboard.vue'
+import Mission from '@/views/workbench/mission.vue'
+import Plan from '@/views/workbench/plan.vue'
+import Maillist from '@/views/workbench/maillist.vue'
+import EnterpriseList from '@/views/enterprise/index.vue'
+import EnterpriseAdd from '@/views/enterprise/add.vue'
+import EnterpriseDetail from '@/views/enterprise/detail.vue'
+import EnterpriseValidate from '@/views/enterprise/validate.vue'
+import VehicleManage from '@/views/vehicle/index.vue'
+import DeptManager from '@/views/dept/index.vue'
 import NotFound from '@/components/404.vue'
-import Register from '@/components/admin/register.vue'
-import RegisterNext from '@/components/admin/registerNext.vue'
+import Register from '@/views/admin/register.vue'
+import RegisterNext from '@/views/admin/registerNext.vue'
 
 // 懒加载方式，当路由被访问的时候才加载对应组件
-const Login = resolve => require(['@/components/login'], resolve)
+const Login = resolve => require(['@/views/login'], resolve)
 
 Vue.use(Router)
 
