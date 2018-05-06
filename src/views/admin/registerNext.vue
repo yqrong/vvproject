@@ -1,7 +1,7 @@
 <template>
   <div class="register-main">
     <div class="header-title">
-      <span class="left-text">注册VV账号</span>
+      <span class="left-text">注册账号</span>
       <span class="right-text">优化管理•智慧出行</span>
     </div>
     <el-row class="register-body">
@@ -38,7 +38,9 @@
         </el-form>
       </el-col>
     </el-row>
-    <div class="footer"><p class="footer-msg">©CopyRight 2016-2017 中仁车汇科技发展（深圳）有限公司 版权所有 <a href="http://www.miibeian.gov.cn" target="_blank">粤ICP备17004709号</a></p></div>
+    <div class="footer">
+		<footer-copyright></footer-copyright>
+	</div>
   </div>
 </template>
 <script>
@@ -243,33 +245,6 @@
     }
   }
 
-  .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    padding: 20px 0;
-    width: 100%;
-    background-color: #2d2e2e;
-
-    .footer-msg {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-      font-size: 1.08rem;
-      color: #666;
-
-      a {
-        color: #428bca;
-        text-decoration: none;
-
-        &:hover,&:focus,&:active {
-           color: #2a6496;
-           text-decoration: underline;
-           outline: 0;
-         }
-      }
-    }
-  }
   @media all and (max-width: 768px) {
     .register-main {
       margin: 0 auto 24px;

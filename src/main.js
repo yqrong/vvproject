@@ -13,6 +13,10 @@ import '@/assets/css/style.css'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 
+Vue.component('footer-copyright', {
+  template: '<p class="footer-msg">©CopyRight 2016-2018 车车科技发展有限公司 版权所有 <a href="http://www.miibeian.gov.cn" target="_blank">粤ICP备******号</a></p>'
+});
+
 new Vue({
   router,
   store,

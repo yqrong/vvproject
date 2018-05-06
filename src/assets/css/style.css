@@ -244,3 +244,33 @@ aside .warp-breadcrum {
   background-color: #fff;
   box-sizing: border-box;
 }
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 20px 0;
+  width: 100%;
+  background-color: #2d2e2e;
+}
+
+.footer .footer-msg {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.08rem;
+  color: #666;
+}
+
+.footer .footer-msg a {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.footer .footer-msg a:hover,
+.footer .footer-msg a:focus,
+.footer .footer-msg a:active {
+   color: #2a6496;
+   text-decoration: underline;
+   outline: 0;
+ }
