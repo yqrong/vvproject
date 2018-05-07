@@ -113,7 +113,7 @@
         if(that.telCorrect && that.codeCorrect){
           that.loading = true;
           //localStorage.setItem('access-user', JSON.stringify(result));
-          that.$router.push({path: '/registerNext'});
+          that.$router.replace({path: '/registerNext'});
         } else {
           that.loading = false;
         }

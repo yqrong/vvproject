@@ -124,7 +124,7 @@
             message: h('i', { style: 'color: teal'}, '注册成功'),
             duration: 1000
           });
-          that.$router.push({path: '/login'});
+          that.$router.replace({path: '/login'});
         } else {
           that.loading = false;
         }
