@@ -24,6 +24,9 @@
         <el-button type="primary" style="width:100%;" @click.native.prevent="handleLogin" :disabled="allowLogin" :loading="loading">登录</el-button>
       </el-form-item>
     </el-form>
+	<div class="footer">
+      <footer-copyright></footer-copyright>
+    </div>
   </div>
 </template>
 <script>
