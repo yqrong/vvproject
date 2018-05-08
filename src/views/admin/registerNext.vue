@@ -109,6 +109,7 @@
           setTimeout(function(){that.$router.replace({path: '/login'})},2000);
         } else {
           that.loading = false;
+		  this.$message.error("请完善必填信息");
         }
       }
     }
