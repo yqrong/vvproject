@@ -17,7 +17,6 @@
           <el-form-item prop="ensurePwd" label="确认密码：">
             <el-input type="password" v-model="account.ensurePwd" auto-complete="off" placeholder="请输入确认密码"></el-input>
           </el-form-item>
-          </el-form-item>
           <el-form-item style="margin-bottom:0; width:100%;">
             <el-button type="primary" style="width:100%;" @click.native.prevent="handleRegister" :loading="loading">注册</el-button>
           </el-form-item>
@@ -95,7 +94,7 @@
       handleRegister(){
         let that = this;
         let result = {
-          username: '15812358888'
+          username: '15812345678'
         };
         if(that.nameCorrect && that.pwdCorrect && that.ensurePwdCorrect){
           that.loading = true;

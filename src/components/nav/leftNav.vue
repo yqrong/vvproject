@@ -19,9 +19,9 @@
                   <i :class="term.iconCls"></i><span slot="title">{{term.name}}</span>
                 </el-menu-item>
               </el-submenu>
-              <el-menu-item v-else-if="item.leaf&&item.children&&item.children.length" :index="item.children[0].path"
-                            :class="$route.path==item.children[0].path?'is-active':''" v-show="item.menuShow">
-                <i :class="item.iconCls"></i><span slot="title">{{item.children[0].name}}</span>
+              <el-menu-item v-else-if="item.leaf" :index="item.path"
+                            :class="$route.path==item.path?'is-active':''" v-show="item.menuShow">
+                <i :class="item.iconCls"></i><span slot="title">{{item.name}}</span>
               </el-menu-item>
             </template>
           </template>
@@ -45,13 +45,15 @@
     name: 'leftNav',
     data () {
       return {
-        collapsed: false
+        loading: false,
+        collapsed: this.$store.state.collapsed
       }
     },
     methods: {
       //折叠导航栏
       collapse: function () {
         this.collapsed = !this.collapsed;
+        this.$store.state.collapsed = this.collapsed;
       },
       jumpTo(url){
         this.$router.push(url); //用go刷新
@@ -59,7 +61,7 @@
     },
     watch: {
       '$route': function(to, from){ // 路由改变时执行
-        //console.info("enterpriseNav to.path:" + to.path);
+        //console.info("to.path:" + to.path);
       }
     }
   }
