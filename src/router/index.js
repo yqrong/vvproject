@@ -171,7 +171,7 @@ let router = new Router({
       children: [
         {
           path: '/dept/list',
-          name: '车辆信息',
+          name: '部门信息',
           components: {
             top: TopNav,
             main:  LeftNav
