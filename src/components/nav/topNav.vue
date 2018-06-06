@@ -91,15 +91,10 @@
           var children = routers[i].children;
           if(children){
             for (var j = 0; j < children.length; j++) {
-              let sub_children = children[j].children;
-              if(sub_children){
-                for (var k = 0; k < sub_children.length; k++){
-                  if (sub_children[k].path === cur_path) {
-                    nav_type = routers[i].type;
-                    nav_name = routers[i].name;
-                    break;
-                  }
-                }
+              if (children[j].path === cur_path) {
+                nav_type = routers[i].type;
+                nav_name = routers[i].name;
+                break;
               }
             }
           }

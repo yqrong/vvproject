@@ -1,44 +1,32 @@
 <template>
-  <el-col :span="24" class="main">
-    <!--左侧导航-->
-    <aside :class="{showSidebar:!collapsed}">
-      <!--展开折叠开关-->
-      <div class="menu-toggle" @click.prevent="collapse">
-        <i class="iconfont icon-outdent" v-show="!collapsed" title="收起"></i>
-        <i class="iconfont icon-indent" v-show="collapsed" title="展开"></i>
-      </div>
-      <!--导航菜单-->
-      <el-menu router :collapse="collapsed">
-        <template v-for="(issue,index) in $router.options.routes">
-          <template v-if="issue.name === $store.state.leftNavState">
-            <template v-for="(item,index) in issue.children">
-              <el-submenu v-if="!item.leaf" :index="index+''" v-show="item.menuShow">
-                <template slot="title"><i :class="item.iconCls"></i><span slot="title">{{item.name}}</span></template>
-                <el-menu-item v-for="term in item.children" :key="term.path" :index="term.path" v-if="term.menuShow"
-                              :class="$route.path==term.path?'is-active':''">
-                  <i :class="term.iconCls"></i><span slot="title">{{term.name}}</span>
-                </el-menu-item>
-              </el-submenu>
-              <el-menu-item v-else-if="item.leaf" :index="item.path"
-                            :class="$route.path==item.path?'is-active':''" v-show="item.menuShow">
-                <i :class="item.iconCls"></i><span slot="title">{{item.name}}</span>
+  <!--左侧导航-->
+  <aside :class="{showSidebar:!collapsed}">
+    <!--展开折叠开关-->
+    <div class="menu-toggle" @click.prevent="collapse">
+      <i class="iconfont icon-outdent" v-show="!collapsed" title="收起"></i>
+      <i class="iconfont icon-indent" v-show="collapsed" title="展开"></i>
+    </div>
+    <!--导航菜单-->
+    <el-menu router :collapse="collapsed">
+      <template v-for="(issue,index) in $router.options.routes">
+        <template v-if="issue.name === $store.state.leftNavState">
+          <template v-for="(item,index) in issue.children">
+            <el-submenu v-if="!item.leaf" :index="index+''" v-show="item.menuShow">
+              <template slot="title"><i :class="item.iconCls"></i><span slot="title">{{item.name}}</span></template>
+              <el-menu-item v-for="term in item.children" :key="term.path" :index="term.path" v-if="term.menuShow"
+                            :class="$route.path==term.path?'is-active':''">
+                <i :class="term.iconCls"></i><span slot="title">{{term.name}}</span>
               </el-menu-item>
-            </template>
+            </el-submenu>
+            <el-menu-item v-else-if="item.leaf" :index="item.path"
+                          :class="$route.path==item.path?'is-active':''" v-show="item.menuShow">
+              <i :class="item.iconCls"></i><span slot="title">{{item.name}}</span>
+            </el-menu-item>
           </template>
         </template>
-      </el-menu>
-    </aside>
-    <!--右侧内容区-->
-    <section class="content-container">
-      <div class="grid-content bg-purple-light">
-        <el-col :span="24" class="content-wrapper">
-          <transition name="fade" mode="out-in">
-            <router-view></router-view>
-          </transition>
-        </el-col>
-      </div>
-    </section>
-  </el-col>
+      </template>
+    </el-menu>
+  </aside>
 </template>
 <script>
   export default {
