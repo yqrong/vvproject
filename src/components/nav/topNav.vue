@@ -115,7 +115,7 @@
         }).then(() => {
           //确认
           localStorage.removeItem('access-user');
-          that.$router.go('/login'); //用go刷新
+          road.$emit('goto', '/login');
         }).catch(() => {});
       }
     },
