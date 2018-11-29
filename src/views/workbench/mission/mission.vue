@@ -10,7 +10,7 @@
             <el-button type="primary" size="medium" v-on:click="handleSearch">查询</el-button>
           </el-form-item>
           <el-form-item class="pull-right">
-            <el-button type="primary" size="medium" @click="showAddDialog"><i class="el-icon-plus"></i>&nbsp;新增</el-button>
+            <el-button type="primary" size="medium" @click="showAddDialog" icon="el-icon-plus">新增</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -46,7 +46,7 @@
     <mission-add ref="addMission" v-if="addVisible" :visible.sync="addVisible"></mission-add>
     <!--详情-->
     <div class="modal-mask" v-if="maskVisible" @click="cancelVisible"></div>
-    <transition name="slide-fade" mode="out-in">
+    <transition name="slide-fade">
       <div class="detail-box" v-if="detailVisible">
         <mission-detail ref="detailMission" :id="detailId"></mission-detail>
       </div>
@@ -62,7 +62,6 @@
       return {
         loading: false,
         idShow: false,
-        keyword: "集团",
         total: 2,
         currentPage: 1,
         pageSize: 10,
