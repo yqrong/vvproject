@@ -4,9 +4,10 @@
     <ul>
       <li><span>任务编号:</span><div>{{detail.number}}</div></li>
       <li><span>任务类型:</span><div>{{detail.type}}</div></li>
-      <li><span>任务内容:</span><div>{{detail.content}}</div></li>
+      <li><span>任务内容:</span><div>{{detail.content | contentFilter}}</div></li>
       <li><span>任务备注:</span><div>{{detail.remark}}</div></li>
       <li><span>创建日期:</span><div>{{detail.createTime | formatDateTime}}</div></li>
+      <li><span>执行日期:</span><div>{{detail.activeTime | formatDateTime}}</div></li>
     </ul>
   </div>
 </template>
@@ -37,11 +38,19 @@
           id: 1,
           number: 'No.00001',
           type: '接收任务',
-          content: '任务详情内容。。。',
+          content: '1',
           remark: '任务备注。。。',
-          createTime: 1540890471000,
+          createTime: 1540560471000,
+          activeTime: 1540890471000,
         };
         this.loading = false;
+      }
+    },
+    filters: {
+      contentFilter: function (value) {
+        if (!value) return ''
+        if (value == '1') return '接乘客'
+        return '派车辆';
       }
     }
   }

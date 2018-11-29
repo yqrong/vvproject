@@ -20,11 +20,10 @@
           <el-table-column prop="mId" v-if="idShow" label="任务ID"></el-table-column>
           <el-table-column prop="mNumber" label="任务编号" sortable></el-table-column>
           <el-table-column prop="mType" label="任务类型"></el-table-column>
-          <el-table-column prop="mContent" label="任务内容" show-overflow-tooltip></el-table-column>
-          <el-table-column prop="eRemark" label="备注"></el-table-column>
-          <el-table-column prop="createTime" label="创建日期"></el-table-column>
-          <el-table-column prop="updateTime" label="更新日期"></el-table-column>
-          <el-table-column prop="recordStatus" label="企业状态"></el-table-column>
+          <el-table-column prop="mContent" label="任务内容"></el-table-column>
+          <el-table-column prop="eRemark" label="任务备注" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="createTime" :formatter="dateFormatter" label="创建日期"></el-table-column>
+          <el-table-column prop="activeTime" :formatter="activeTateFormatter" label="执行日期"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
               <el-button
@@ -44,7 +43,7 @@
     </el-row>
 
     <!--添加-->
-    <mission-add ref="addMission" v-if="addVisible"></mission-add>
+    <mission-add ref="addMission" v-if="addVisible" :visible.sync="addVisible"></mission-add>
     <!--详情-->
     <div class="modal-mask" v-if="maskVisible" @click="cancelVisible"></div>
     <transition name="slide-fade" mode="out-in">
@@ -73,9 +72,8 @@
           mType: '接收订单',
           mContent: '接乘客',
           eRemark: '无',
-          createTime: '2017-03-27',
-          updateTime: '2016-03-27',
-          recordStatus: '1'
+          createTime: 1540560471000,
+          activeTime: 1540760471000
         },
           {
             mId: 2,
@@ -83,9 +81,8 @@
             mType: '转发订单',
             mContent: '接乘客',
             eRemark: '无',
-            createTime: '2017-03-27',
-            updateTime: '2016-03-27',
-            recordStatus: '1'
+            createTime: 1540560471000,
+            activeTime: 1540680471000
           }],
         addVisible: false, // 添加弹窗flag
         detailVisible: false, // 详情弹窗flag
@@ -101,31 +98,57 @@
       'mission-detail': MissionDetail
     },
     methods: {
+      // 搜索
       handleSearch(){
         console.info(this.filters.number);
       },
+      // 详情
       handleDetail(row, event, column) {
         this.detailId = row.mId;
         this.maskVisible = true;
         this.detailVisible = true;
       },
+      // 删除
       handleDelete(index, row) {
         console.log(index, row);
       },
+      // 选择每页显示条数
       handleSizeChange(val){
 //        this.pageSize = val;
 //        this.currentPage = 1;
       },
+      // 跳转页
       handleCurrentChange(val){
 //        this.currentPage = val;
       },
+      // 添加弹窗
       showAddDialog(){
         this.addVisible = true;
       },
+      // 关闭所有弹窗
       cancelVisible() {
         this.maskVisible = false;
         this.detailVisible = false;
-      }
+      },
+      // 创建日期转换
+      dateFormatter(row, column) {
+        return this.getDateValue(row.createTime);
+      },
+      // 执行日期转换
+      activeTateFormatter(row, column) {
+        return this.getDateValue(row.activeTime);
+      },
+      // 获取日期
+      getDateValue(datetime) {
+        if (datetime) {
+          datetime = new Date(datetime);
+          let y = datetime.getFullYear() + '-';
+          let mon = datetime.getMonth() + 1 + '-';
+          let d = datetime.getDate();
+          return y + mon + d;
+        }
+        return ''
+      },
     }
   }
 </script>

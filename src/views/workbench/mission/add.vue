@@ -6,12 +6,12 @@
              :before-close="handleClose">
     <el-form :model="form">
       <el-form-item label="任务编号：" :label-width="formLabelWidth">
-        <el-input v-model="form.number" placeholder="请选择任务类型" auto-complete="off"></el-input>
+        <el-input v-model="form.number" placeholder="请输入任务编号" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item label="任务类型：" :label-width="formLabelWidth">
         <el-select v-model="form.type" placeholder="请选择任务类型">
-          <el-option label="接收任务" value="receive"></el-option>
-          <el-option label="转发任务" value="forward"></el-option>
+          <el-option label="接收任务" value="接收任务"></el-option>
+          <el-option label="转发任务" value="转发任务"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="任务内容：" :label-width="formLabelWidth">
@@ -24,7 +24,10 @@
         <el-input v-model="form.remark" type="textarea" placeholder="请填写任务备注"></el-input>
       </el-form-item>
       <el-form-item label="创建日期：" :label-width="formLabelWidth">
-        <el-date-picker v-model="form.createTime" type="date" placeholder="请选择日期"></el-date-picker>
+        <el-date-picker v-model="form.createTime" type="date" placeholder="请选择日期" disabled></el-date-picker>
+      </el-form-item>
+      <el-form-item label="执行日期：" :label-width="formLabelWidth">
+        <el-date-picker v-model="form.activeTime" type="date" placeholder="请选择日期"></el-date-picker>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -48,14 +51,15 @@
           type: '',
           content: '1',
           remark: '',
-          createTime: '',
+          createTime: new Date(),
+          activeTime: ''
         },
         formLabelWidth: '120px',
       }
     },
     methods: {
       editFormSubmit() {
-        this.$message.success("修改提示");
+        this.$message.success("保存提示");
       },
       // 关闭
       handleClose() {
