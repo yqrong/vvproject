@@ -5,18 +5,19 @@ import Env from './env';
 import axios from 'axios'
 import {road} from '../road.js'
 
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';//配置请求头
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';//配置请求头
 
 //添加一个请求拦截器
-// axios.interceptors.request.use(function (config) {
-//   console.dir(config);
-//   return config;
-// }, function (error) {
-//   // Do something with request error
-//   return Promise.reject(error);
-// });
+axios.interceptors.request.use(function (config) {
+  //console.dir(config);
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
 
 // 添加一个响应拦截器
 axios.interceptors.response.use(function (response) {
