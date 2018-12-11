@@ -36,7 +36,7 @@
       </el-col>
       <el-col :span="24" class="toolbar">
         <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange"
-                       :current-page="currentPage" :page-sizes="[10, 50, 100, 200]" :page-size="10"
+                       :current-page="currentPage" :page-sizes="[10, 50, 100, 200]" :page-size="pageSize"
                        layout="total, sizes, prev, pager, next, jumper" :total="total">
         </el-pagination>
       </el-col>
