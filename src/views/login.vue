@@ -122,7 +122,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    height: 30px;
+    height: 50px;
     padding: 6px 0;
     border-bottom: 1px solid #ddd;
     box-shadow: 0 0 2px #ddd;
