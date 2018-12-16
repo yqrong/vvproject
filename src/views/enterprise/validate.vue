@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="warp-main" style="padding: 10px;">
     <p>企业认证</p>
 
     <el-upload class="avatar-uploader" name="avatar" action="/upload" :data="uploadData" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">

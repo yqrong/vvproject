@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="warp-main">
     <div>
       <el-button @click="startHacking">Start</el-button>
     </div>

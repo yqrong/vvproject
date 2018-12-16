@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="warp-main">
     <el-button type="primary" icon="el-icon-edit" @click="clickShow">客户查看</el-button>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-col :span="24" class="warp-main" v-loading="loading" element-loading-text="拼命加载中">
+  <div class="warp-main">
+    <el-row :span="24" v-loading="loading" element-loading-text="拼命加载中">
       <el-col :span="24" class="toolbar" style="padding-bottom: 0;">
         <el-form :inline="true" :model="filters">
           <el-form-item>
@@ -9,7 +9,6 @@
           <el-form-item>
             <el-button type="primary" size="medium" v-on:click="fetchData">查询</el-button>
           </el-form-item>
-        </el-form>
         </el-form>
       </el-col>
       <el-table ref="multipleTable" :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
@@ -38,7 +37,7 @@
           :total="total">
         </el-pagination>
       </el-col>
-    </el-col>
+    </el-row>
   </div>
 </template>
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="warp-main" style="overflow: hidden; padding: 10px;">
     <p style="margin-bottom: 20px; font-weight: 500;">添加企业</p>
     <el-form ref="form" :model="form" label-width="110px">
       <el-col :span="12">
