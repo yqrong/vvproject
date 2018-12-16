@@ -18,8 +18,6 @@ import EnterpriseValidate from '@/views/enterprise/validate.vue'
 import VehicleManage from '@/views/vehicle/index.vue'
 import DeptManager from '@/views/dept/index.vue'
 import NotFound from '@/components/404.vue'
-import Register from '@/views/admin/register.vue'
-import RegisterNext from '@/views/admin/registerNext.vue'
 
 // 懒加载方式，当路由被访问的时候才加载对应组件
 const Login = resolve => require(['@/views/login'], resolve)
@@ -32,16 +30,6 @@ let router = new Router({
       path: '/login',
       type: 'login',
       component: Login
-    },
-    {
-      path: '/register',
-      type: 'register',
-      component: Register
-    },
-    {
-      path: '/registerNext',
-      type: 'register',
-      component: RegisterNext
     },
     {
       path: '*',
@@ -192,9 +180,6 @@ let router = new Router({
 router.beforeEach((to, from, next) => {
   // console.log('to:' + to.path)
   if (to.path.startsWith('/login')) {
-    window.localStorage.removeItem('access-user')
-    next()
-  } else if(to.path.startsWith('/register')){
     window.localStorage.removeItem('access-user')
     next()
   } else {

@@ -4,6 +4,7 @@
 import Env from './env';
 import axios from 'axios'
 import {road} from '../road.js'
+import routerIndex from '../router/index'
 
 axios.defaults.withCredentials = false;
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
@@ -24,7 +25,8 @@ axios.interceptors.response.use(function (response) {
   if (response.data && response.data.errcode) {
     if (parseInt(response.data.errcode) === 40001) {
       //未登录
-      road.$emit('goto', '/login')
+      road.$message.error('请重新登录');
+      routerIndex.push('/login');
     }
   }
   return response;

@@ -7,8 +7,9 @@
       <i class="iconfont icon-indent" v-show="collapsed" title="展开"></i>
     </div>
     <!--导航菜单-->
-    <el-menu router :collapse="collapsed">
+    <el-menu router :collapse="collapsed" ref="leftNavigation">
       <template v-for="(issue,index) in $router.options.routes">
+        <!-- 注意：这里就是leftNavState状态作用之处，当该值与router的根路由的name相等时加载相应菜单组 -->
         <template v-if="issue.name === $store.state.leftNavState">
           <template v-for="(item,index) in issue.children">
             <el-submenu v-if="!item.leaf" :index="index+''" v-show="item.menuShow">
@@ -34,7 +35,7 @@
     data () {
       return {
         loading: false,
-        collapsed: this.$store.state.collapsed
+        collapsed: this.$store.state.collapsed,
       }
     },
     methods: {
@@ -43,15 +44,44 @@
         this.collapsed = !this.collapsed;
         this.$store.state.collapsed = this.collapsed;
       },
-      jumpTo(url){
-        this.$router.push(url); //用go刷新
-      }
+      // 左侧导航栏根据当前路径默认打开子菜单（如果当前是二级菜单，则父级子菜单默认打开）
+      defaultLeftNavOpened () {
+        let cur_path = this.$route.path; //获取当前路由
+        let routers = this.$router.options.routes; // 获取路由对象
+        let subMenuIndex = '', needOpenSubmenu = false;
+        for (let i = 0; i < routers.length; i++) {
+          let children = routers[i].children;
+          if(children){
+            for (let j = 0; j < children.length; j++) {
+              if(children[j].path === cur_path) {
+                break;
+              }
+              // 如果该菜单下还有子菜单
+              if(children[j].children && !children[j].leaf) {
+                let grandChildren = children[j].children;
+                for(let z=0; z<grandChildren.length; z++) {
+                  if(grandChildren[z].path === cur_path) {
+                    subMenuIndex = j;
+                    needOpenSubmenu = true;
+                    break;
+                  }
+                }
+              }
+            }
+          }
+        }
+        if(this.$refs['leftNavigation'] && needOpenSubmenu) {
+          this.$refs['leftNavigation'].open(subMenuIndex); // 打开子菜单
+        }
+      },
     },
     watch: {
       '$route': function(to, from){ // 路由改变时执行
         //console.info("to.path:" + to.path);
       }
-    }
+    },
+    mounted() {
+      this.defaultLeftNavOpened();
+    },
   }
 </script>
-

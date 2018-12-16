@@ -9,6 +9,7 @@
         <a href="/" style="color: #fff;">车车综合管理</a>
       </div>
       <div class="topbar-title">
+        <!-- 注意：这里就是topNavState作用之处，根据当前路由所在根路由的type值判断显示不同顶部导航菜单 -->
         <el-row v-show="$store.state.topNavState==='home'">
           <el-col :span="24">
             <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
@@ -84,17 +85,28 @@
         this.defaultActiveIndex = index;
       },
       fetchNavData () { // 初始化菜单激活项
-        var cur_path = this.$route.path; //获取当前路由
-        var routers = this.$router.options.routes; // 获取路由对象
-        var nav_type = "home", nav_name = "home";
+        let cur_path = this.$route.path; //获取当前路由
+        let routers = this.$router.options.routes; // 获取路由对象
+        let nav_type = "", nav_name = "";
         for (var i = 0; i < routers.length; i++) {
-          var children = routers[i].children;
+          let children = routers[i].children;
           if(children){
-            for (var j = 0; j < children.length; j++) {
+            for (let j = 0; j < children.length; j++) {
               if (children[j].path === cur_path) {
                 nav_type = routers[i].type;
                 nav_name = routers[i].name;
                 break;
+              }
+              // 如果该菜单下还有子菜单
+              if(children[j].children) {
+                let grandChildren = children[j].children;
+                for(let z=0; z<grandChildren.length; z++) {
+                  if(grandChildren[z].path === cur_path) {
+                    nav_type = routers[i].type;
+                    nav_name = routers[i].name;
+                    break;
+                  }
+                }
               }
             }
           }
@@ -109,7 +121,6 @@
       },
       logout(){
         //logout
-        let that = this;
         this.$confirm('确认退出吗?', '提示', {
           confirmButtonClass: 'el-button--warning'
         }).then(() => {
