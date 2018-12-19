@@ -65,13 +65,13 @@ ul {
 
 .container .topbar-wrap .topbar-logo {
   float: left;
-  width: 48px;
+  width: 60px;
   line-height: 26px;
 }
 
 .container .topbar-wrap .topbar-logos {
   float: left;
-  width: 140px;
+  width: 128px;
   line-height: 48px;
   font-size: 14px;
 }

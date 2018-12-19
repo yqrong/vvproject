@@ -6,7 +6,7 @@
         <a href="/"><img src="../../assets/logo.png" style="padding-left:8px;"></a>
       </div>
       <div class="topbar-logos">
-        <a href="/" style="color: #fff;">车车综合管理</a>
+        <a href="/" style="color: #fff;"><span v-show="!$store.state.collapsed">车车综合管理</span></a>
       </div>
       <div class="topbar-title">
         <!-- 注意：这里就是topNavState作用之处，根据当前路由所在根路由的type值判断显示不同顶部导航菜单 -->

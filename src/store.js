@@ -23,6 +23,7 @@ const data = [
 ]
 
 const state = {
+  collapsed: false,
   topNavState: 'home',
   leftNavState: 'home'
 }
