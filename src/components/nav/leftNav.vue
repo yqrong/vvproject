@@ -7,7 +7,7 @@
       <i class="iconfont icon-indent" v-show="collapsed" title="展开"></i>
     </div>
     <!--导航菜单-->
-    <el-menu router :collapse="collapsed" ref="leftNavigation">
+    <el-menu :default-active="$route.path" router :collapse="collapsed" ref="leftNavigation">
       <template v-for="(issue,index) in $router.options.routes">
         <!-- 注意：这里就是leftNavState状态作用之处，当该值与router的根路由的name相等时加载相应菜单组 -->
         <template v-if="issue.name === $store.state.leftNavState">
@@ -15,12 +15,12 @@
             <el-submenu v-if="!item.leaf" :index="index+''" v-show="item.menuShow">
               <template slot="title"><i :class="item.iconCls"></i><span slot="title">{{item.name}}</span></template>
               <el-menu-item v-for="term in item.children" :key="term.path" :index="term.path" v-if="term.menuShow"
-                            :class="$route.path==term.path?'is-active':''">
+                            :class="$route.path===term.path?'is-active':''">
                 <i :class="term.iconCls"></i><span slot="title">{{term.name}}</span>
               </el-menu-item>
             </el-submenu>
             <el-menu-item v-else-if="item.leaf" :index="item.path"
-                          :class="$route.path==item.path?'is-active':''" v-show="item.menuShow">
+                          :class="$route.path===item.path?'is-active':''" v-show="item.menuShow">
               <i :class="item.iconCls"></i><span slot="title">{{item.name}}</span>
             </el-menu-item>
           </template>
