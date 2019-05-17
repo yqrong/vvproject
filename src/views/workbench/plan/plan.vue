@@ -16,12 +16,12 @@
       </el-col>
       <!--表格数据-->
       <el-col :span="24" class="table-wrapper">
-        <el-table :data="infoData" stripe style="width: 100%">
+        <el-table :data="infoData" stripe style="width: 100%" @row-click="planDetail">
           <el-table-column type="expand">
             <template slot-scope="props">
               <el-form label-position="left" inline class="info-table-expand">
                 <el-form-item label="计划编号：">
-                  <span>{{props.row.id}}</span>
+                  <span>{{props.row.pNum}}</span>
                 </el-form-item>
                 <el-form-item label="计划名称：">
                   <span>{{props.row.name}}</span>
@@ -41,7 +41,7 @@
               </el-form>
             </template>
           </el-table-column>
-          <el-table-column label="计划编号" prop="id"></el-table-column>
+          <el-table-column label="计划编号" prop="pNum"></el-table-column>
           <el-table-column label="计划名称" prop="name"></el-table-column>
           <el-table-column label="计划内容" prop="content"></el-table-column>
         </el-table>
@@ -54,10 +54,17 @@
         </el-pagination>
       </el-col>
     </el-row>
-
+    <!--详情-->
+    <div class="modal-mask" v-if="maskVisible" @click="cancelVisible"></div>
+    <transition name="slide-fade">
+      <div class="detail-box" v-if="detailVisible">
+        <plan-detail ref="detailPlan" :detail="detail"></plan-detail>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
+  import PlanDetail from './detail'
   export default {
     name: 'plan',
     data (){
@@ -70,15 +77,17 @@
         currentPage: 1,
         pageSize: 10,
         infoData: [{
-          id: 'P0001',
-          name: '计划A',
-          content: '计划内容',
-          startTime: '2018-04-20 08:00:00',
-          finishTime: '2018-04-20 09:00:00',
-          remark: '备注内容'
-        },
+            id: 1,
+            pNum: 'P0001',
+            name: '计划A',
+            content: '计划内容',
+            startTime: '2018-04-20 08:00:00',
+            finishTime: '2018-04-20 09:00:00',
+            remark: '备注内容'
+          },
           {
-            id: 'P0002',
+            id: 2,
+            pNum: 'P0002',
             name: '计划B',
             content: '计划内容',
             startTime: '2018-04-19 08:00:00',
@@ -86,7 +95,8 @@
             remark: '备注内容'
           },
           {
-            id: 'P0003',
+            id: 3,
+            pNum: 'P0003',
             name: '计划C',
             content: '计划内容',
             startTime: '2018-04-18 08:00:00',
@@ -94,7 +104,8 @@
             remark: '备注内容'
           },
           {
-            id: 'P0004',
+            id: 4,
+            pNum: 'P0004',
             name: '计划D',
             content: '计划内容',
             startTime: '2018-04-17 08:00:00',
@@ -102,14 +113,21 @@
             remark: '备注内容'
           },
           {
-            id: 'P0005',
+            id: 5,
+            pNum: 'P0005',
             name: '计划E',
             content: '计划内容',
             startTime: '2018-04-16 08:00:00',
             finishTime: '2018-04-16 23:00:00',
             remark: '备注内容'
-          }]
+          }],
+        detailVisible: false, // 详情弹窗flag
+        maskVisible: false, // 弹窗mask显示
+        detail: null, // 详情ID
       }
+    },
+    components: {
+      'plan-detail': PlanDetail
     },
     methods: {
       addPlan() {
@@ -118,6 +136,17 @@
           message: '这是一条消息提示',
           type: 'success'
         });
+      },
+      // 详情
+      planDetail(row, event, column) {
+        this.detail = row;
+        this.maskVisible = true;
+        this.detailVisible = true;
+      },
+      // 关闭详情弹窗
+      cancelVisible() {
+        this.maskVisible = false;
+        this.detailVisible = false;
       },
       // search data
       handleSearch() {
@@ -147,5 +176,26 @@
     margin-right: 0;
     margin-bottom: 0;
     width: 50%;
+  }
+  .detail-box {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 500px;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 2000;
+    background-color: #fff;
+  }
+  .modal-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background-color: #000;
+    opacity: .3;
   }
 </style>
